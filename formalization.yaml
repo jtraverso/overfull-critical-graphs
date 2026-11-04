@@ -1,0 +1,182 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Overfullness of critical graphs with small minimum degree (Cao–Chen–Jing–Shan, variant)"
+  description: >-
+    A Lean 4 / Mathlib formalization of Theorem 1.2 of Cao, Chen, Jing and Shan with a weaker
+    constant. overfull_of_critical: if a finite simple graph G is Δ-critical (connected, its line
+    graph is not Δ(G)-colourable, and G − e is Δ(G)-edge-colourable for every edge e) and
+    3|V(G)| + 7δ(G) ≤ 4Δ(G) + 10, then G is overfull: |E(G)| > Δ(G)·⌊|V(G)|/2⌋. The article
+    assumes 4Δ − 7δ ≥ 3n − 17; the hypothesis here is 4Δ − 7δ ≥ 3n − 10, stronger by 7, because
+    two common-neighbour counts in the article's proof (Case 2 of Section 3 and the fork branch of
+    Case 1) use one more unit of degree than is available and are short by 2 under the article's
+    constant. With the constant −10 every count closes, and the proof needs neither n ≥ 13 nor the
+    Chetwynd–Hilton theorem for Δ ≥ n − 3. One statement. The proof includes the lemmas the
+    article imports: Vizing's adjacency lemma, the multifan lemma, Kierstead paths on four
+    vertices, the fork lemma of Cao and Chen, the short-kite lemma of Cao, Chen and Shan, and the
+    kite lemma (Lemma 2.8, in the form used by Theorem 1.2), with proofs written from scratch where
+    the article only cites them.
+  authors:
+    - "Juan Pablo Traverso Gianini"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Juan Pablo Traverso Gianini"
+
+classification:
+  arxiv: ["math.CO"]
+  msc2020: ["05C15"]
+
+sources:
+  - title: "The overfullness of graphs with small minimum degree and large maximum degree"
+    authors:
+      - "Yan Cao"
+      - "Guantao Chen"
+      - "Guangming Jing"
+      - "Songling Shan"
+    id: "arXiv:2105.05333"
+    type: "paper"
+    location: >-
+      SIAM Journal on Discrete Mathematics 36 (2022), 2258–2270; arXiv:2105.05333v1: Theorem 1.2,
+      Lemmas 2.1–2.8, 3.1, 4.1, Section 3 (proof of Theorem 1.2) and Section 4 (proof of Lemma 2.8).
+    relationship: "adapts"
+    note: >-
+      Theorem 1.2 is proved under 3n + 7δ ≤ 4Δ + 10 instead of 4Δ − 7δ ≥ 3n − 17. In Case 2 of
+      Section 3, and in the fork branch of Case 1, the article finds a common neighbour of four
+      vertices "by the same argument as in (1)"; that argument needs degrees at least Δ − k + 2,
+      while only Δ − k + 1 is available, so the count falls short by 2 (and a may lie in the
+      counted set). The arXiv version (v1, the only one) was used; the journal version was not
+      consulted. The structure of the proof follows the article: the degree dichotomy (Lemma 2.5),
+      the Parity Lemma, two small vertices (Case 1: a kite or a fork) and one small vertex (Case 2:
+      a short kite). Lemma 2.8 is proved for kites all of whose path edges have colours in
+      φ̄(a) ∪ φ̄(b), with d(b) = Δ and with at least seven colours of φ̄(a) missing at both t₁ and
+      t₂ in every colouring of G − ab, which is what Theorem 1.2 provides; its proof is a new
+      normalisation by Kempe changes (Lemma 4.1 is not needed) followed by the article's closing
+      recolourings. Lemma 2.4 (Kierstead paths on four vertices) is proved without the book it is
+      cited from. The formalization is by a different author; the article's authors were not
+      involved.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "On the average degree of edge chromatic critical graphs II"
+    authors:
+      - "Yan Cao"
+      - "Guantao Chen"
+    type: "paper"
+    location: "Journal of Combinatorial Theory, Series B 145 (2020), 470–486: Proposition B and Claims 5.6–5.10."
+    relationship: "formalizes"
+    note: >-
+      The fork lemma (CCJS Lemma 2.6): no fork when Δ ≥ d(a) + d(t₁) + d(t₂) + 1, formalized as
+      Overfull.fork_lemma together with the counting form used by Theorem 1.2. Not a separate
+      compared statement.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "An improvement to the vertex-splitting conjecture"
+    authors:
+      - "Yan Cao"
+      - "Guantao Chen"
+      - "Songling Shan"
+    id: "arXiv:2103.05171"
+    type: "paper"
+    location: "arXiv:2103.05171 (the short-kite lemma, CCJS Lemma 2.7)."
+    relationship: "formalizes"
+    note: >-
+      The short-kite lemma, formalized (Overfull.shortKiteProp) in the general form used by CCJS,
+      where x and y each miss some colour of φ̄(a) ∪ φ̄(b); the proof is a reconstruction
+      (NOTES_KITES.md). Not a separate compared statement.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "Graph Edge Coloring: Vizing's Theorem and Goldberg's Conjecture"
+    authors:
+      - "Michael Stiebitz"
+      - "Diego Scheide"
+      - "Bjarne Toft"
+      - "Lene M. Favrholdt"
+    type: "book"
+    location: "Wiley, 2012: Theorem 2.1 (multifans) and Theorem 3.3 (Kierstead paths), cited by CCJS as Lemmas 2.2 and 2.4."
+    relationship: "background"
+    note: "The book was not consulted; the multifan lemma and Lemma 2.4 are proved here from scratch (NOTES_KIERSTEAD4.md)."
+    license: "all rights reserved"
+    author_endorsement: "n/a"
+  - title: "On the chromatic index of multigraphs without large triangles"
+    authors:
+      - "H. A. Kierstead"
+    type: "paper"
+    location: "Journal of Combinatorial Theory, Series B 36 (1984): Lemma 2; with the observation of L. Zhang, Graphs and Combinatorics 16 (2000), for Δ colours."
+    relationship: "formalizes"
+    note: "Kierstead paths with interior vertices of degree below Δ are elementary (Overfull.kierstead_elementary). Not a separate compared statement."
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "Critical graphs with given chromatic class"
+    authors:
+      - "V. G. Vizing"
+    type: "paper"
+    location: "Diskretnyi Analiz 5 (1965), 9–17 (in Russian): Vizing's adjacency lemma (CCJS Lemma 2.1)."
+    relationship: "formalizes"
+    note: "Vizing's adjacency lemma (Overfull.val), proved with a maximal multifan. Not a separate compared statement."
+    license: "unknown"
+    author_endorsement: "n/a"
+
+related_formalizations:
+  - id: "PALOMAR-2026-10-15-000004 (jtraverso/vizing @ 33b2de8)"
+    relationship: "builds-on"
+    note: >-
+      Pinned dependency. Its partial edge colourings (PEC), Kempe graphs and swaps, and fan
+      rotation are used throughout the proof; the compared statement uses only Mathlib
+      (SimpleGraph.lineGraph, Colorable, maxDegree, minDegree, deleteEdges, edgeFinset).
+
+status:
+  scope: >-
+    One statement: CCJS Theorem 1.2 with the constant −10 instead of −17. Not formalized: the
+    article's constant −17 (its proof has the gap described above), Theorem 1.1 of the article,
+    and the kite lemma in the article's general form (Lemma 2.8 is proved in the form Theorem 1.2
+    uses).
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Opus 5.5"]
+      framework: "Claude Code (Anthropic)"
+      tool_setup: >-
+        Wrote the whole Lean development (Overfull/), the reconstructed proofs of the cited lemmas
+        (NOTES_*.md), the Challenge/Solution pair and the packaging under the author's direction.
+        Checked with a local build, a comparison of the elaborated Challenge and Solution
+        statements and definitions (pp.all), and #print axioms (Lean v4.35.0-rc3, Mathlib
+        c55e6e786f49471c72fbddbec5415808896aec1e).
+      cost:
+        wall_time: "several days"
+        spend_usd: "subscription-based"
+        hardware: "local machine"
+      prompting_notes: "Natural-language instructions in Spanish, directed by the author."
+  spend_usd: "not tracked"
+  notes: >-
+    The Lean development is AI-written under the author's direction and mechanically verified: no
+    sorry, axioms limited to propext, Classical.choice and Quot.sound, identical elaborated
+    statements and definitions in the Challenge and the Solution.
+
+fidelity:
+  divergences: >-
+    The hypothesis is 3n + 7δ ≤ 4Δ + 10 (natural numbers), i.e. 4Δ − 7δ ≥ 3n − 10, instead of the
+    article's 4Δ − 7δ ≥ 3n − 17. Graphs are Mathlib SimpleGraphs on a finite vertex type. Class two
+    is "the line graph is not Δ(G)-colourable"; Δ-critical means connected, class two, and
+    G.deleteEdges {e} has a Δ(G)-colourable line graph for every edge e (with Δ = Δ(G)); overfull
+    is Δ(G)·⌊n/2⌋ < |E(G)|.
+
+review:
+  status: "agent-reviewed"
+  reviewers:
+    - "Claude Opus 5.5 (AI agent in Claude Code, acting for the author)"
+  notes: >-
+    Agent review by Claude Opus 5.5, distinct from the mechanical verification: the agent checked
+    the statement and the definitions against the source and documented the gap in the article's
+    counting. No independent human review of the formalization has been performed.
+
+alignment:
+  namespace: "Overfull"
+  statements:
+    - {source: "Cao–Chen–Jing–Shan, Theorem 1.2 (constant −10 instead of −17)", lean: "Overfull.overfull_of_critical", module: "CCJSChallenge", status: "proved"}
+
+acknowledgements: >-
+  Mathlib and the Lean community.

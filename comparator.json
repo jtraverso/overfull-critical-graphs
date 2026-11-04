@@ -1,0 +1,14 @@
+{
+  "challenge_module": "CCJSChallenge",
+  "solution_module": "CCJSSolution",
+  "theorem_names": [
+    "Overfull.overfull_of_critical"
+  ],
+  "definition_names": [],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}
