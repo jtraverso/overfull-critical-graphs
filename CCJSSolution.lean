@@ -7,6 +7,7 @@ module
 
 public import Mathlib
 public import Overfull.Theorem12
+public import Overfull.ChenCao
 
 /-!
 # Solution
@@ -15,4 +16,7 @@ public import Overfull.Theorem12
 `Overfull.Basic`; `Overfull.overfull_of_critical` is proved in `Overfull.Theorem12`, from the
 kite lemmas (`Overfull.KiteG`, `Overfull.ShortKite`), the fork lemma (`Overfull.Fork`) and the
 counting arguments of `Overfull.Theorem12a`–`Overfull.Theorem12d`.
+`Overfull.overfull_of_critical_cc` and `Overfull.overfull_of_critical_ccjs` are proved in
+`Overfull.ChenCao`, from the broom lemma (`Overfull.Broom`), the kite lemma without `c`
+(`Overfull.Kite0D`) and the frame `Overfull.CCa`–`Overfull.CCd`.
 -/

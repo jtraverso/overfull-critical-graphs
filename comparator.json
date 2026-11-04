@@ -2,7 +2,9 @@
   "challenge_module": "CCJSChallenge",
   "solution_module": "CCJSSolution",
   "theorem_names": [
-    "Overfull.overfull_of_critical"
+    "Overfull.overfull_of_critical",
+    "Overfull.overfull_of_critical_cc",
+    "Overfull.overfull_of_critical_ccjs"
   ],
   "definition_names": [],
   "permitted_axioms": [

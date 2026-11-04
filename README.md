@@ -10,6 +10,8 @@ in place of `−17`**.
 | Lean | Statement |
 |---|---|
 | `Overfull.overfull_of_critical` | If `G` is `Δ`-critical and `3n + 7δ(G) ≤ 4Δ(G) + 10` (`n = \|V(G)\|`), then `G` is overfull: `\|E(G)\| > Δ(G) ⌊n/2⌋`. |
+| `Overfull.overfull_of_critical_cc` | **Chen–Cao, Theorem 1.3** ([arXiv:2512.07252](https://arxiv.org/abs/2512.07252)) with `−6` in place of `−12`: if `G` is `Δ`-critical and `2n + 5δ(G) ≤ 3Δ(G) + 6`, then `G` is overfull. |
+| `Overfull.overfull_of_critical_ccjs` | CCJS Theorem 1.2 with its original constant: if `G` is `Δ`-critical, `4Δ(G) − 7δ(G) ≥ 3n − 17` and `n + δ(G) ≥ 27`, then `G` is overfull. |
 
 `G` is `Δ`-critical when it is connected, of class two (its line graph is not
 `Δ(G)`-colourable) and `G − e` is `Δ(G)`-edge-colourable for every edge `e`. The definitions use
@@ -23,6 +25,14 @@ argument needs degrees at least `Δ − k + 2`, but only `Δ − k + 1` is avail
 falls short by 2. With `3n + 7δ ≤ 4Δ + 10` every count closes; the proof then needs neither
 `n ≥ 13` nor the Chetwynd–Hilton theorem for `Δ ≥ n − 3`. Details in
 [`NOTES_KITES.md`](NOTES_KITES.md).
+
+## Chen–Cao (version 2)
+
+The proof of Chen and Cao's Theorem 1.3 replaces CCJS's four-centre counts by three-centre counts.
+[`Broom`](Overfull/Broom.lean) proves their Lemma 3.1 (a broom with two leaves; the short kite
+without its vertex `c`), [`Kite0D`](Overfull/Kite0D.lean) their Lemma 4.2 (a kite without `c`),
+and [`CCa`–`CCd`](Overfull/CCd.lean), [`ChenCao`](Overfull/ChenCao.lean) the theorem; details in
+[`NOTES_CHENCAO.md`](NOTES_CHENCAO.md).
 
 ## The proof
 

@@ -2,7 +2,7 @@
 version: "v0.4"
 
 project:
-  name: "Overfullness of critical graphs with small minimum degree (Cao–Chen–Jing–Shan, variant)"
+  name: "Overfullness of critical graphs with small minimum degree (Cao–Chen–Jing–Shan; Chen–Cao)"
   description: >-
     A Lean 4 / Mathlib formalization of Theorem 1.2 of Cao, Chen, Jing and Shan with a weaker
     constant. overfull_of_critical: if a finite simple graph G is Δ-critical (connected, its line
@@ -16,7 +16,12 @@ project:
     article imports: Vizing's adjacency lemma, the multifan lemma, Kierstead paths on four
     vertices, the fork lemma of Cao and Chen, the short-kite lemma of Cao, Chen and Shan, and the
     kite lemma (Lemma 2.8, in the form used by Theorem 1.2), with proofs written from scratch where
-    the article only cites them.
+    the article only cites them. Version 2 adds two statements. overfull_of_critical_cc: Theorem
+    1.3 of Chen and Cao (arXiv:2512.07252) with a weaker constant: a Δ-critical graph with
+    2|V(G)| + 5δ(G) ≤ 3Δ(G) + 6 is overfull (the article assumes 3Δ ≥ 2n + 5δ − 12; the constant
+    −6 comes from counting common neighbours of three vertices without the article's refinements).
+    overfull_of_critical_ccjs: CCJS Theorem 1.2 with its original constant: a Δ-critical graph with
+    4Δ − 7δ ≥ 3n − 17 and n + δ ≥ 27 is overfull (then 3Δ ≥ 2n + 5δ − 6). Three statements.
   authors:
     - "Juan Pablo Traverso Gianini"
   license: "Apache-2.0"
@@ -55,6 +60,27 @@ sources:
       recolourings. Lemma 2.4 (Kierstead paths on four vertices) is proved without the book it is
       cited from. The formalization is by a different author; the article's authors were not
       involved.
+    license: "unknown"
+    author_endorsement: "not-contacted"
+  - title: "Short brooms in edge-chromatic critical graphs"
+    authors:
+      - "Yonglei Chen"
+      - "Yan Cao"
+    id: "arXiv:2512.07252"
+    type: "paper"
+    location: "arXiv:2512.07252v2: Theorem 1.3, Lemma 3.1, Lemma 4.2 and Section 4."
+    relationship: "adapts"
+    note: >-
+      Theorem 1.3 is proved under 2n + 5δ ≤ 3Δ + 6 instead of 3Δ ≥ 2n + 5δ − 12. The structure of
+      the proof follows the article (Cases 1 and 2 with three-centre counts, the fork lemma, Lemma
+      4.2 and Lemma 3.1), without Chetwynd–Hilton and without Lemma 4.5 (ii). Lemma 3.1 (the case
+      of Theorem 1.1 for a broom with two leaves) is proved as the short-kite argument without the
+      vertex c, with the article's closing argument for Subcase A.1. Lemma 4.2 is proved for kites
+      all of whose path colours lie in φ̄(x) ∪ φ̄(y), with d(y) = Δ and at least five colours of
+      φ̄(x) missing at both t₁ and t₂ in every colouring (four in the article); its normalisation
+      is our own, and the closing argument when the (β, η)-chain of z ends at y is the article's.
+      Not separate compared statements. The formalization is by a different author; the
+      article's authors were not involved.
     license: "unknown"
     author_endorsement: "not-contacted"
   - title: "On the average degree of edge chromatic critical graphs II"
@@ -126,10 +152,10 @@ related_formalizations:
 
 status:
   scope: >-
-    One statement: CCJS Theorem 1.2 with the constant −10 instead of −17. Not formalized: the
-    article's constant −17 (its proof has the gap described above), Theorem 1.1 of the article,
-    and the kite lemma in the article's general form (Lemma 2.8 is proved in the form Theorem 1.2
-    uses).
+    Three statements: CCJS Theorem 1.2 with the constant −10; Chen–Cao Theorem 1.3 with the
+    constant −6; CCJS Theorem 1.2 with its constant −17 when n + δ ≥ 27. Not formalized: CCJS's
+    constant −17 for n + δ < 27, Chen–Cao's constant −12, Theorem 1.1 of either article in general
+    (only the two-leaf broom of Chen–Cao), and the kite lemmas in their general form.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms: []
@@ -158,8 +184,10 @@ automation:
 
 fidelity:
   divergences: >-
-    The hypothesis is 3n + 7δ ≤ 4Δ + 10 (natural numbers), i.e. 4Δ − 7δ ≥ 3n − 10, instead of the
-    article's 4Δ − 7δ ≥ 3n − 17. Graphs are Mathlib SimpleGraphs on a finite vertex type. Class two
+    overfull_of_critical assumes 3n + 7δ ≤ 4Δ + 10 (natural numbers), i.e. 4Δ − 7δ ≥ 3n − 10,
+    instead of CCJS's 4Δ − 7δ ≥ 3n − 17; overfull_of_critical_ccjs has CCJS's constant with the
+    extra hypothesis n + δ ≥ 27; overfull_of_critical_cc assumes 2n + 5δ ≤ 3Δ + 6 instead of
+    Chen–Cao's 3Δ ≥ 2n + 5δ − 12. Graphs are Mathlib SimpleGraphs on a finite vertex type. Class two
     is "the line graph is not Δ(G)-colourable"; Δ-critical means connected, class two, and
     G.deleteEdges {e} has a Δ(G)-colourable line graph for every edge e (with Δ = Δ(G)); overfull
     is Δ(G)·⌊n/2⌋ < |E(G)|.
@@ -177,6 +205,8 @@ alignment:
   namespace: "Overfull"
   statements:
     - {source: "Cao–Chen–Jing–Shan, Theorem 1.2 (constant −10 instead of −17)", lean: "Overfull.overfull_of_critical", module: "CCJSChallenge", status: "proved"}
+    - {source: "Chen–Cao, Theorem 1.3 (constant −6 instead of −12)", lean: "Overfull.overfull_of_critical_cc", module: "CCJSChallenge", status: "proved"}
+    - {source: "Cao–Chen–Jing–Shan, Theorem 1.2 (original constant, n + δ ≥ 27)", lean: "Overfull.overfull_of_critical_ccjs", module: "CCJSChallenge", status: "proved"}
 
 acknowledgements: >-
   Mathlib and the Lean community.
